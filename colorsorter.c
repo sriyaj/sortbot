@@ -37,14 +37,56 @@ void dropIt()
 	setMotor(clawMotor, -50);
 }
 
+TSimpleColors pickOneColor()
+{
+	TSimpleColors choosenColor;
+	choosenColor = colorRed;
+
+	setTouchLEDColor(touchLED, colorRed);
+	wait(2, seconds);
+	if(getTouchLEDValue(touchLED) == true)
+	{
+		choosenColor = colorRed;
+		return choosenColor;
+	}
+
+	setTouchLEDColor(touchLED, colorGreen);
+	wait(2, seconds);
+	if (getTouchLEDValue(touchLED) == true)
+	{
+		choosenColor = colorGreen;
+		return choosenColor;
+	}
+
+	setTouchLEDColor(touchLED, colorYellow);
+	wait(2, seconds);
+	if (getTouchLEDValue(touchLED) == true)
+	{
+		choosenColor = colorYellow;
+		return choosenColor;
+	}
+
+	setTouchLEDColor(touchLED, colorBlue);
+	wait(2, seconds);
+	if (getTouchLEDValue(touchLED) == true)
+	{
+		choosenColor = colorBlue;
+		return choosenColor;
+	}
+
+	return choosenColor;
+}
+
 task main()
 {
+	TSimpleColors myColor;
 	repeat (forever) {
+		myColor = pickOneColor();
 		if (getDistanceValue(distanceMM) > 70) {
 			moveForward();
 		} else {
 			stopAndGrab();
-			if (getColorName(colorDetector) == colorRed) {
+			if (getColorName(colorDetector) == myColor) {
 				throwBehind();
 			} else {
 				dropIt();
