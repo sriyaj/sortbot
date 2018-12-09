@@ -10,31 +10,35 @@
 
 void moveForward()
 {
-	setMotor(motor1, 50);
-	setMotor(motor6, 50);
+	resetMotorEncoder(clawMotor);
+			setMotor(motor1, 50); //left tires goes forward
+			setMotor(motor6, 50); //right tires goes forward
 }
 
 void addToCart()
 {
-	setMotor(armMotor, 50);
-	wait(3, seconds);
-	setMotor(clawMotor, -50);
-	wait(5, seconds);
-	setMotor(armMotor, -50);
-	wait(2, seconds);
+	resetMotorEncoder(armMotor); //Take current position as zero.
+				setServoTarget(armMotor, 1000);  //Enable Servo Mode and move to position 60.
+				sleep(2000);
+
+				setServoTarget(clawMotor, 0);//claw drops object
+				sleep(2000);
+				setServoTarget(armMotor, 0);   //Enable Servo Mode and move to position 10.
+				sleep(2000); //arm goes up //arm moves down
+				wait(2, seconds);
 }
 
 void stopAndPick()
 {
-	stopAllMotors();
-	wait(1, seconds);
-	setMotor(clawMotor, 50);
-	wait(2, seconds);
+stopAllMotors(); // stops moving
+			wait(1, seconds);
+			setServoTarget(clawMotor, 500); //claw grabs object
+			wait(1, seconds);
 }
 
 void dropIt()
 {
-	setMotor(clawMotor, -50);
+	setServoTarget(clawMotor, 0);
 }
 
 TSimpleColors chooseOneColor()
@@ -44,12 +48,12 @@ TSimpleColors chooseOneColor()
 	int i=0;
 	TSimpleColors choosenColor;
 	choosenColor = colorRed;
-	
+
 	for (i=0; i<40; i++)
 	{
 		setTouchLEDColor(touchLED, colorBox[i%4]);
 		wait(5, seconds);
-		
+
 		if(getTouchLEDValue(touchLED) == true)
 		{
 			choosenColor = colorBox[i];
@@ -64,25 +68,25 @@ task main()
 	TSimpleColors myColor=colorNone;
 	myColor = chooseOneColor();
 
-	repeat (forever) 
+	repeat (forever)
 	{
-		if (getDistanceValue(distanceMM) < 70) 
+		if (getDistanceValue(distanceMM) < 70)
 		{
 			stopAndPick();
-			
-			if (getColorName(colorDetector) == myColor) 
+
+			if (getColorName(colorDetector) == myColor)
 			{
 				addToCart();
-			} 
-			else 
+			}
+			else
 			{
 				dropIt();
 			}
-		} 
-		else 
+		}
+		else
 		{
 			moveForward();
-			
+
 			if(getTouchLEDValue(touchLED) == true)
 			{
 				myColor = chooseOneColor();
