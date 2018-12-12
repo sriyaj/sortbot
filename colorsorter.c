@@ -25,10 +25,12 @@ task OnDriveMode()
 			setMotorTarget(armMotor, -1200, 30);
 			setMotorTarget(clawMotor,-100, 50);
 			wait(6, seconds);
-			setMotorTarget(clawMotor,100,50);
-
-
+			setMotorTarget(clawMotor,100, 50);
 			wait(3, seconds);
+
+			setServoTarget(armMotor, 0);
+			wait(3, seconds);
+			setMotorTarget(clawMotor,-100, 50);
 		}		
 //		else 
 //		{
