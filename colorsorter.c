@@ -13,16 +13,17 @@ task OnDriveMode()
 	repeat (forever) {
 		if(getDistanceValue(distanceMM) >= 300) //Keep going until this reaches 30 cm
 		{
-			//resetMotorEncoder(clawMotor);
+			resetMotorEncoder(clawMotor);
 			resetMotorEncoder(armMotor);
 			setMotorTarget(armMotor, 0, 50);
 			//wait(2,seconds);
 			setMultipleMotors(50, motor1, motor6, , );
-			waitUntil (getDistanceValue(distanceMM) <= 330);
+			waitUntil (getDistanceValue(distanceMM) <= 105);
 			stopAllMotors();
 
 			wait(2, seconds);
-			setMotorTarget(armMotor, -900, 50);
+			setMotorTarget(armMotor, -1200, 30);
+			setMotorTarget(clawMotor, 100, 50)
 
 			//setMotor(motor1, 50); //left tires goes forward
 			//setMotor(motor6, 50); //right tires goes forward
