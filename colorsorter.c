@@ -14,19 +14,20 @@ task OnDriveMode()
 		if(getDistanceValue(distanceMM) >= 300) //Keep going until this reaches 30 cm
 		{
 			resetMotorEncoder(clawMotor);
+			setMotorTarget(clawMotor, 0, 50);
 			resetMotorEncoder(armMotor);
 			setMotorTarget(armMotor, 0, 50);
-			//wait(2,seconds);
 			setMultipleMotors(50, motor1, motor6, , );
-			waitUntil (getDistanceValue(distanceMM) <= 105);
+			waitUntil (getDistanceValue(distanceMM) <= 150);
 			stopAllMotors();
 
 			wait(2, seconds);
 			setMotorTarget(armMotor, -1200, 30);
-			setMotorTarget(clawMotor, 100, 50)
+			setMotorTarget(clawMotor,-100, 50);
+			wait(6, seconds);
+			setMotorTarget(clawMotor,100,50);
 
-			//setMotor(motor1, 50); //left tires goes forward
-			//setMotor(motor6, 50); //right tires goes forward
+
 			wait(3, seconds);
 		}		
 //		else 
