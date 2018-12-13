@@ -26,50 +26,32 @@ task OnDriveMode()
 			setMotorTarget(clawMotor,-100, 50);
 			wait(6, seconds);
 			setMotorTarget(clawMotor,100, 50);
-			wait(3, seconds);
+			wait(3, sec onds);
 
-			setServoTarget(armMotor, 0);
-			wait(3, seconds);
-			setMotorTarget(clawMotor,-100, 50);
-		}		
-//		else 
-//		{
-//			setServoTarget(armMotor, -1200);
-//			wait(2, seconds);
-//			setMotor(clawMotor, 20);
-//			wait(1, seconds);
-//			//claw grabs object
-//			setServoTarget(clawMotor, 500);
-//			wait(4, seconds);
-//
-//			if ((getColorValue(colorDetector)<29) || (getColorValue(colorDetector)>219)) //detects red hue
-//			{
-//				setTouchLEDColor(touchLED, colorRed); //color lights up if red
-//				setServoTarget(armMotor, 200);  //Enable Servo Mode and move to position 100.
-//				sleep(2000);
-//				setMotor(clawMotor, -50);//claw drops object
-//				sleep(2000);
-//				wait(2, seconds);
-//			}
-//			else
-//			{
-//
-//				setMotor(clawMotor, -50);//claw drops object if not yellow
-//				setServoTarget(armMotor, 1000);
-//				setMotor(leftMotor, -127);
-//				setMotor(rightMotor, -127);
-//				sleep(1000);//Wait for 1 second before continuing on in the program.
-//
-//				setMotor(leftMotor, -127);		//Set the leftMotor (motor1) to full power reverse (-127)
-//				setMotor(rightMotor, 0);  	//Set the rightMotor (motor6) to full power forward (127)
-//				sleep(1000);									//Wait for 1 second before continuing on in the program.
-//
-//				setMotor(leftMotor, 127);
-//				setMotor(rightMotor, 127);
-//				sleep(1000);	//Wait for 1 second before continuing on in the program.
-//
-//			}
-//		}//end of else
+			if ((getColorValue(colorDetector)<29) || (getColorValue(colorDetector)>219)) //detects red hue
+			{
+				setTouchLEDColor(touchLED, colorRed); //color lights up if red
+				setServoTarget(armMotor, 0);
+				wait(3, seconds);
+				setMotorTarget(clawMotor,-100, 50);
+				wait(2, seconds);
+			}
+			else
+			{
+
+				setMotor(clawMotor, -50);//claw drops object if not yellow
+				setServoTarget(armMotor, 1000);
+				setMultipleMotors(leftMotor, rightMotor, -127);
+				sleep(1000);//Wait for 1 second before continuing on in the program.
+
+				setMotor(leftMotor, -127);		//Set the leftMotor (motor1) to full power reverse (-127)
+				setMotor(rightMotor, 0);  	//Set the rightMotor (motor6) to full power forward (127)
+				sleep(1000);									//Wait for 1 second before continuing on in the program.
+				setMultipleMotors(leftMotor, rightMotor, 127);
+				sleep(1000);	//Wait for 1 second before continuing on in the program.
+			}
+		} //end of if
+		//		}//end of else
 	}//end of forever
 }
 //__________________________________________________________________________________________//
