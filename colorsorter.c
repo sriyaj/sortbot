@@ -28,9 +28,22 @@ task OnDriveMode()
 			setMotorTarget(clawMotor,100, 50);
 			wait(3, seconds);
 
-			setServoTarget(armMotor, 0);
-			wait(3, seconds);
-			setMotorTarget(clawMotor,-100, 50);
+			if ((getColorValue(colorDetector)<29) || (getColorValue(colorDetector)>219)) //detects red hue
+			{
+				displayTextLine(1, "Pick this hue= %d", getColorValue(colorDetector) );
+		
+				setServoTarget(armMotor, 0);
+				wait(3, seconds);
+				setMotorTarget(clawMotor,-500, 50);
+			}
+			else
+			{
+				displayTextLine(1, "Drop this hue= %d", getColorValue(colorDetector) );
+				setMotorTarget(clawMotor,-500, 50);
+				wait(3, seconds);
+				setServoTarget(armMotor, 0);
+			}
+			
 		}		
 	}//end of forever
 }
