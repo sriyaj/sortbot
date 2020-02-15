@@ -44,16 +44,28 @@ task main()
 			setTouchLEDHue(touchLED, currentHueValue); //This is more accurate
 			setTouchLEDBlinkTime(touchLED, 40, 10);
 
-			waitUntilMotorStop(leftFrontWheel);
-			waitUntilMotorStop(rightFrontWheel);
-			waitUntilMotorStop(leftRearWheel);
-			waitUntilMotorStop(rightRearWheel);
+			// resetMotorEncoder(leftFrontWheel);
+			// resetMotorEncoder(rightFrontWheel);
+			// resetMotorEncoder(leftRearWheel);
+			// resetMotorEncoder(rightRearWheel);
+
+			// //Reset the current position in the motor encoder to zero.
+			// //Set motor to run 5 counts at power level -40.
+			// moveMotorTarget(leftFrontWheel, 0, 0);
+			// moveMotorTarget(rightFrontWheel, 0, 0);
+			// moveMotorTarget(leftRearWheel, 0, 0);
+			// moveMotorTarget(rightRearWheel, 0, 0);
+
+			// waitUntilMotorStop(leftFrontWheel);
+			// waitUntilMotorStop(rightFrontWheel);
+			// waitUntilMotorStop(leftRearWheel);
+			// waitUntilMotorStop(rightRearWheel);
 
 		}
 		else if((getColorValue(colorDetector) > 50) && (getColorValue(colorDetector) <= 130))//GREEN
 		{
 
-		  playSound(soundSiren2);
+			playSound(soundCarAlarm2);
 
 			//Detect a Green Color
 			int currentHueValue = getColorValue(colorDetector);
@@ -64,17 +76,16 @@ task main()
 			setTouchLEDHue(touchLED, currentHueValue);
 			setTouchLEDBlinkTime(touchLED, 40, 10);
 
-			//Reset the current position in the motor encoder to zero.
+			// //Reset the current position in the motor encoder to zero.
 			resetMotorEncoder(leftFrontWheel);
 			resetMotorEncoder(rightFrontWheel);
 			resetMotorEncoder(leftRearWheel);
 			resetMotorEncoder(rightRearWheel);
 
-			//Set motor to run 5 counts at power level 40.
-			moveMotorTarget(leftFrontWheel, 5000, 40);
-			moveMotorTarget(rightFrontWheel, 5000, 40);
-			moveMotorTarget(leftRearWheel, 5000, 40);
-			moveMotorTarget(rightRearWheel, 5000, 40);
+			moveMotorTarget(leftFrontWheel, 5, 4);
+			moveMotorTarget(rightFrontWheel, 5, 4);
+			moveMotorTarget(leftRearWheel, 5, 4);
+			moveMotorTarget(rightRearWheel, 5, 4);
 
 			//Blocking command prevents program from continuing until movement is complete.
 			waitUntilMotorStop(leftFrontWheel);
@@ -83,9 +94,9 @@ task main()
 			waitUntilMotorStop(rightRearWheel);
 
 		}
-		else if((getColorValue(colorDetector) > 131) && (getColorValue(colorDetector) <= 219))
+		else if((getColorValue(colorDetector) > 131) && (getColorValue(colorDetector) <= 219))//BLUE
 		{
-			playSound(soundSiren2);
+			playSound(soundCarAlarm4);
 
 			//Detect a Blue Color
 			int currentHueValue = getColorValue(colorDetector);
@@ -96,19 +107,19 @@ task main()
 			setTouchLEDHue(touchLED, currentHueValue);
 			setTouchLEDBlinkTime(touchLED, 40, 10);
 
-			//Reset the current position in the motor encoder to zero.
+			// //Reset the current position in the motor encoder to zero.
 			resetMotorEncoder(leftFrontWheel);
 			resetMotorEncoder(rightFrontWheel);
 			resetMotorEncoder(leftRearWheel);
 			resetMotorEncoder(rightRearWheel);
 
-			//Set motor to run 5 counts at power level -40.
-			moveMotorTarget(leftFrontWheel, -5000, -20);
-			moveMotorTarget(rightFrontWheel, -5000, -20);
-			moveMotorTarget(leftRearWheel, -5000, -20);
-			moveMotorTarget(rightRearWheel, -5000, -20);
+			// //Set motor to run 5 counts at power level -40.
+			moveMotorTarget(leftFrontWheel, -5, -4);
+			moveMotorTarget(rightFrontWheel, -5, -4);
+			moveMotorTarget(leftRearWheel, -5, -4);
+			moveMotorTarget(rightRearWheel, -5, -4);
 
-			//Blocking command prevents program from continuing until movement is complete.
+			// //Blocking command prevents program from continuing until movement is complete.
 			waitUntilMotorStop(leftFrontWheel);
 			waitUntilMotorStop(rightFrontWheel);
 			waitUntilMotorStop(leftRearWheel);
@@ -116,6 +127,8 @@ task main()
 		}
 		else if(getColorValue(colorDetector) > 219)
 		{
+            playSound(soundPowerOff2);
+
 			//Detect a Red Color (second half of the range)
 			int currentHueValue = getColorValue(colorDetector);
 			displayTextLine(1, "I see RED!");  //Command to Write to the LCD Screen
@@ -125,10 +138,22 @@ task main()
 			setTouchLEDHue(touchLED, currentHueValue);
 			setTouchLEDBlinkTime(touchLED, 40, 10);
 
-			waitUntilMotorStop(leftFrontWheel);
-			waitUntilMotorStop(rightFrontWheel);
-			waitUntilMotorStop(leftRearWheel);
-			waitUntilMotorStop(rightRearWheel);
+			// resetMotorEncoder(leftFrontWheel);
+			// resetMotorEncoder(rightFrontWheel);
+			// resetMotorEncoder(leftRearWheel);
+			// resetMotorEncoder(rightRearWheel);
+
+			// //Reset the current position in the motor encoder to zero.
+			// //Set motor to run 5 counts at power level -40.
+			// moveMotorTarget(leftFrontWheel, 0, 0);
+			// moveMotorTarget(rightFrontWheel, 0, 0);
+			// moveMotorTarget(leftRearWheel, 0, 0);
+			// moveMotorTarget(rightRearWheel, 0, 0);
+
+			// waitUntilMotorStop(leftFrontWheel);
+			// waitUntilMotorStop(rightFrontWheel);
+			// waitUntilMotorStop(leftRearWheel);
+			// waitUntilMotorStop(rightRearWheel);
 
 		}
 		sleep(25); //Small delay to allow color sensor to detect any changes in color
